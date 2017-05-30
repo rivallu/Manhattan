@@ -93,7 +93,7 @@
 <li><a class="reference internal" href="#">modules</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-modules.Compression">modules.Compression module</a></li>
-<li><a class="reference internal" href="#modules-decompression-module">modules.Decompression module</a></li>
+<li><a class="reference internal" href="#module-modules.Decompression">modules.Decompression module</a></li>
 <li><a class="reference internal" href="#module-modules">Module contents</a></li>
 </ul>
 </li>
@@ -189,7 +189,8 @@ suivant l’algo Lempel-Ziv-Welch.
 <dd><p>Fonction qui permet d’ajouter du paddin à un nombre binaire. le nombre renvoyé
 est sur 9 bits.
 :param binary: un nombre binaire
-:return: le même nombre binaire mais sur 9 bits</p>
+:return: le même nombre binaire mais sur 9 bits
+:raise: IOEerror retourne le code d’erreur de la classe IO.</p>
 </dd></dl>
 
 <dl class="function">
@@ -198,8 +199,18 @@ est sur 9 bits.
 <dd></dd></dl>
 
 </div>
-<div class="section" id="modules-decompression-module">
-<h2>modules.Decompression module<a class="headerlink" href="#modules-decompression-module" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="module-modules.Decompression">
+<span id="modules-decompression-module"></span><h2>modules.Decompression module<a class="headerlink" href="#module-modules.Decompression" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="function">
+<dt id="modules.Decompression.CinDico">
+<code class="descclassname">modules.Decompression.</code><code class="descname">CinDico</code><span class="sig-paren">(</span><em>caractere</em>, <em>dictionnaire</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#CinDico"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.CinDico" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="modules.Decompression.Decompress">
+<code class="descclassname">modules.Decompression.</code><code class="descname">Decompress</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#Decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.Decompress" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="module-modules">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modules" title="Lien permanent vers ce titre">¶</a></h2>

@@ -195,6 +195,7 @@
 <span class="sd">    est sur 9 bits.</span>
 <span class="sd">    :param binary: un nombre binaire</span>
 <span class="sd">    :return: le même nombre binaire mais sur 9 bits</span>
+<span class="sd">    :raise: IOEerror retourne le code d&#39;erreur de la classe IO.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">while</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">):</span>
         <span class="n">binary</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{0:b}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="n">binary</span>
