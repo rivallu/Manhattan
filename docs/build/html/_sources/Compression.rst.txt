@@ -1,0 +1,7 @@
+Compression module
+==================
+
+.. automodule:: Compression
+    :members:
+    :undoc-members:
+    :show-inheritance:
