@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -9,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; documentation Manhattan 3.6.1</title>
+  <title>modules &mdash; documentation Manhattan 3.6.1</title>
   
 
   
@@ -34,7 +33,7 @@
 
   
         <link rel="index" title="Index"
-              href="#"/>
+              href="genindex.html"/>
         <link rel="search" title="Recherche" href="search.html"/>
     <link rel="top" title="documentation Manhattan 3.6.1" href="index.html"/> 
 
@@ -90,7 +89,16 @@
             
             
               <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">modules</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modules.Compression">modules.Compression module</a></li>
+<li><a class="reference internal" href="#modules-decompression-module">modules.Decompression module</a></li>
+<li><a class="reference internal" href="#module-modules">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
             
           
         </div>
@@ -133,12 +141,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Index</li>
+      <li>modules</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -150,61 +160,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- <a href="#C"><strong>C</strong></a>
- | <a href="#G"><strong>G</strong></a>
- | <a href="#M"><strong>M</strong></a>
- | <a href="#P"><strong>P</strong></a>
- | <a href="#W"><strong>W</strong></a>
- 
+  <div class="section" id="modules">
+<h1>modules<a class="headerlink" href="#modules" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers ce titre">¶</a></h2>
 </div>
-<h2 id="C">C</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules.html#modules.Compression.compress">compress() (dans le module modules.Compression)</a>
-</li>
-  </ul></td>
-</tr></table>
+<div class="section" id="module-modules.Compression">
+<span id="modules-compression-module"></span><h2>modules.Compression module<a class="headerlink" href="#module-modules.Compression" title="Lien permanent vers ce titre">¶</a></h2>
+<dl class="function">
+<dt id="modules.Compression.compress">
+<code class="descclassname">modules.Compression.</code><code class="descname">compress</code><span class="sig-paren">(</span><em>String</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#compress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.compress" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction qui permet de compresser une chaine de caractère en
+suivant l’algo Lempel-Ziv-Welch.
+:param: une chaine de caractère
+:return: la chaine compressé</p>
+</dd></dl>
 
-<h2 id="G">G</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules.html#modules.Compression.genDict">genDict() (dans le module modules.Compression)</a>
-</li>
-  </ul></td>
-</tr></table>
+<dl class="function">
+<dt id="modules.Compression.genDict">
+<code class="descclassname">modules.Compression.</code><code class="descname">genDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#genDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.genDict" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction qui génère un dictionnaire
+:return: le dictionnaire</p>
+</dd></dl>
 
-<h2 id="M">M</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules.html#module-modules">modules (module)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules.html#module-modules.Compression">modules.Compression (module)</a>
-</li>
-  </ul></td>
-</tr></table>
+<dl class="function">
+<dt id="modules.Compression.paddin">
+<code class="descclassname">modules.Compression.</code><code class="descname">paddin</code><span class="sig-paren">(</span><em>binary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#paddin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.paddin" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction qui permet d’ajouter du paddin à un nombre binaire. le nombre renvoyé
+est sur 9 bits.
+:param binary: un nombre binaire
+:return: le même nombre binaire mais sur 9 bits</p>
+</dd></dl>
 
-<h2 id="P">P</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules.html#modules.Compression.paddin">paddin() (dans le module modules.Compression)</a>
-</li>
-  </ul></td>
-</tr></table>
+<dl class="function">
+<dt id="modules.Compression.writteFile">
+<code class="descclassname">modules.Compression.</code><code class="descname">writteFile</code><span class="sig-paren">(</span><em>bytesString</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#writteFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.writteFile" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
 
-<h2 id="W">W</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="modules.html#modules.Compression.writteFile">writteFile() (dans le module modules.Compression)</a>
-</li>
-  </ul></td>
-</tr></table>
-
+</div>
+<div class="section" id="modules-decompression-module">
+<h2>modules.Decompression module<a class="headerlink" href="#modules-decompression-module" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<div class="section" id="module-modules">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modules" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+</div>
 
 
            </div>

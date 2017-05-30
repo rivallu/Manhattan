@@ -1,0 +1,7 @@
+Decompression module
+====================
+
+.. automodule:: Decompression
+    :members:
+    :undoc-members:
+    :show-inheritance:
