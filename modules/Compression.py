@@ -4,7 +4,7 @@
 
 def genDict():
     """
-    Fonction qui génère un dictionnaire
+    Fonction qui génère un dictionnaire pour permettre la compression
     :return: le dictionnaire
     """
     dico={}
@@ -38,7 +38,7 @@ def paddin(binary):
     """
     Fonction qui permet d'ajouter du paddin à un nombre binaire. le nombre renvoyé
     est sur 9 bits.
-    :param binary: un nombre binaire
+    :param: un nombre binaire
     :return: le même nombre binaire mais sur 9 bits
     """
     while(len(binary)<10):
@@ -46,6 +46,11 @@ def paddin(binary):
     return binary
 
 def writteFile(bytesString):
+    """
+    Fonction qui permet d'écrire le contenu compresser dans un fichier binaire.
+    :param: la chaine compresser en binaire
+    :raise: IOEerror retourne le code d'erreur de la classe IO.
+    """
     try:
         with open('archive.lzw','wb+') as archive:
             for h in range(0,len(bytesString),8):
