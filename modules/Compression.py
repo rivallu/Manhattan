@@ -14,12 +14,12 @@ def genDict():
 
 def compress(String):
     """
-        Fonction qui permet de compresser une chaine de caractère en
-        suivant l'algo Lempel-Ziv-Welch.
-        :param: une chaine de caractère
-        :return: la chaine compressé
+    Fonction qui permet de compresser une chaine de caractère en
+    suivant l'algo Lempel-Ziv-Welch.
+    :param: une chaine de caractère
+    :return: la chaine compressé
     """
-    output=b''
+    output=''
     dico=genDict()
     w=''
     for letter in String:
@@ -28,10 +28,39 @@ def compress(String):
             w=element
         else:
             dico.update({element:len(dico)})
-            output+=str.encode(bin(dico.get(w)))
+            binary="{0:b}".format(dico.get(w))
+            binary=paddin(binary)
+            output+=binary
             w=letter;
     return output
 
+def paddin(binary):
+    """
+    Fonction qui permet d'ajouter du paddin à un nombre binaire. le nombre renvoyé
+    est sur 9 bits.
+    :param binary: un nombre binaire
+    :return: le même nombre binaire mais sur 9 bits
+    """
+    while(len(binary)<10):
+        binary="{0:b}".format(0)+binary
+    return binary
+
+def writteFile(bytesString):
+    try:
+        with open('archive.lzw','wb+') as archive:
+            for h in range(0,len(bytesString),8):
+                hexString=bytesString[h:h+8]
+                hexInt=int(hexString,2)
+                archive.write(bytes([hexInt]))
+            archive.close()
+    except IOError as e:
+        print('Error')
 
 if __name__ == '__main__':
-    print(compress("TOBEORNOTTOBEORTOBEORNOT"))
+    # assert(paddin('000001')=='0000000001')
+    # assert(paddin('000001')!='00000001')
+    f= open("test",'r')
+    line=f.read()
+    f.close
+    # print(compress("TOBEORNOTTOBEORTOBEORNOT"))
+    writteFile(compress(line))
