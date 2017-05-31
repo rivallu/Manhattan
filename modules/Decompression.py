@@ -8,28 +8,34 @@ def CinDico(caractere, dictionnaire):
         if caractere == dictionnaire[i][0]:
             test = i
     return test
-    
+
+def startDecompress(fileName):
+    """
+
+    """
+    lines=LectureFichier(fileName)
+    Decompress(lines)
 
 def LectureFichier(chemin):
-    
+
     fichier = open(chemin, 'rb')
-    
+
     ligne = fichier.readlines()
-    
+
     binary = ""
-    
+
     for i in range(0, len(ligne[0])):
         binary = binary + str(bin(ligne[0][i])) + " "
-    
+
     ligne = binary.split("0b")
     ligne.remove('')
-    
+
     fichier.close()
     return ligne
 
 
 def Decompress(caracteres):
-    
+
     resultat = open("C://Users//matth//Documents//ENSIBS//Programmation Objet//Manhattan//resultat.txt", 'w')
     dictionnaire = []
 
@@ -46,16 +52,16 @@ def Decompress(caracteres):
             entree = w + w[0]
         else :
             entree = chr(test_code)
-        
+
         resultat.write(entree)
-        
+
         try :
             dictionnaire.append([dictionnaire[-1][0] + 1, w + entree[0]])
         except IndexError :
             dictionnaire.append([256, w + entree[0]])
-        
+
         w = entree
-    
+
     print(dictionnaire)
     resultat.close()
     return "Opération Réussie !"
