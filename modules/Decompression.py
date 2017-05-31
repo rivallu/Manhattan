@@ -3,61 +3,59 @@
 
 
 def CinDico(caractere, dictionnaire):
-    test = False
+    test = -1
     for i in range(0, len(dictionnaire)):
         if caractere == dictionnaire[i][0]:
-            test = True
+            test = i
     return test
     
 
-def Decompress():
-    fichier = open("C://Users//matth//Documents//ENSIBS//Programmation Objet//Manhattan//test//archive.lzw", 'rb')
-    resultat = open("resultat.txt", 'w')
-
-    ligne = fichier.readlines()
+def LectureFichier(chemin):
     
-    print(ligne)
+    fichier = open(chemin, 'rb')
+    
+    ligne = fichier.readlines()
     
     binary = ""
     
     for i in range(0, len(ligne[0])):
-        binary = binary + str(bin(int(ligne[0][i], 16)))
+        binary = binary + str(bin(ligne[0][i])) + " "
     
-    caracteres = []
-    dictionnaire = []
+    ligne = binary.split("0b")
+    ligne.remove('')
     
-    for i in range(0, len(binary), 10):
-        caracteres.append(ligne[0][i:i+10])
+    fichier.close()
+    return ligne
 
-    resultat.write(char(caracteres[0]))
+
+def Decompress(caracteres):
+    
+    resultat = open("C://Users//matth//Documents//ENSIBS//Programmation Objet//Manhattan//resultat.txt", 'w')
+    dictionnaire = []
+
+    resultat.write(chr(int(caracteres[0], 2)))
     w = chr(int(caracteres[0], 2))
 
     for i in range(1, len(caracteres)):
-        if int(caracteres[i], 2) > 255 and CinDico(int(caracteres[i], 2), dictionnaire) :
-            for i in range(0, len(dictionnaire)) :
-                if dictionnaire[i][0] == int(caracteres[i], 2) :
-                    entree = dictionnaire[i][1]
-                    break
-        elif int(caracteres[i], 2) > 255 and CinDico(int(caracteres[i], 2), dictionnaire) == False :
+        presence = CinDico(int(caracteres[i], 2), dictionnaire)
+        test_code = int(caracteres[i], 2)
+        if test_code > 255 and  presence != -1 :
+            entree = dictionnaire[presence][1]
+
+        elif test_code > 255 and presence == -1 :
             entree = w + w[0]
         else :
-            entree = chr(int(caracteres[i], 2))
+            entree = chr(test_code)
+        
         resultat.write(entree)
-        dictionnaire.append([dictionnaire[-1][0] + 1, w + entree[0]])
+        
+        try :
+            dictionnaire.append([dictionnaire[-1][0] + 1, w + entree[0]])
+        except IndexError :
+            dictionnaire.append([256, w + entree[0]])
+        
         w = entree
     
-    fichier.close()
+    print(dictionnaire)
     resultat.close()
-    
-    
-    
-    #exctraction du caractère
-    #w = c
-    #dictionnaire = []
-
-    #while c != '' :
-        #if c > 255 and CinDico(c, dictionnaire) :
-            #entree = 
-            
-    dictionnaire = []
-    print(caracteres)
+    return "Opération Réussie !"
