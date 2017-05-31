@@ -45,6 +45,7 @@ def convertToH(seconds):
 
 arg=parse_args()
 tps1 = time.time()
+
 if arg.create:
     print('Début de la compression')
     if arg.output is not None:
@@ -55,8 +56,18 @@ if arg.create:
         Compression.compress(arg.file,fileName,"lzw")
     except Exception as error:
         print(error)
+
 elif arg.extract:
     print('Début de la décompression')
+    try:
+        Decompression.startDecompress(arg.fileName)
+
+    except Exception as e:
+        print(error)
+
+else:
+    print('Error')
+
 tps2 = time.time()
 totalTime=tps2-tps1
 totalTime=convertToH(totalTime)
