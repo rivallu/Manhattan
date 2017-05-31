@@ -169,34 +169,104 @@
 <span id="modules-compression-module"></span><h2>modules.Compression module<a class="headerlink" href="#module-modules.Compression" title="Lien permanent vers ce titre">¶</a></h2>
 <dl class="function">
 <dt id="modules.Compression.compress">
-<code class="descclassname">modules.Compression.</code><code class="descname">compress</code><span class="sig-paren">(</span><em>String</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#compress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.compress" title="Lien permanent vers cette définition">¶</a></dt>
+<code class="descclassname">modules.Compression.</code><code class="descname">compress</code><span class="sig-paren">(</span><em>fileIn</em>, <em>fileOut</em>, <em>algo</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#compress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.compress" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction générique qui fait les appels au différentes fonctions pour compresser
+en fonction de l’algo donnée.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fileIn</strong> – Le fichier à compresser</li>
+<li><strong>fileOut</strong> – le fichier de sortie</li>
+<li><strong>algo</strong> – l’algo utilisé pour la compression.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="modules.Compression.compressLZW">
+<code class="descclassname">modules.Compression.</code><code class="descname">compressLZW</code><span class="sig-paren">(</span><em>String</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#compressLZW"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.compressLZW" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p>Fonction qui permet de compresser une chaine de caractère en
-suivant l’algo Lempel-Ziv-Welch.
-:param: une chaine de caractère
-:return: la chaine compressé</p>
+suivant l’algo Lempel-Ziv-Welch.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">une chaine de caractère</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return output:</th><td class="field-body">la chaine compressé</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="modules.Compression.genDict">
 <code class="descclassname">modules.Compression.</code><code class="descname">genDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#genDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.genDict" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Fonction qui génère un dictionnaire
-:return: le dictionnaire</p>
+<dd><p>Fonction qui génère un dictionnaire pour permettre la compression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return dico:</th><td class="field-body">le dictionnaire</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="modules.Compression.openFileToCompress">
+<code class="descclassname">modules.Compression.</code><code class="descname">openFileToCompress</code><span class="sig-paren">(</span><em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#openFileToCompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.openFileToCompress" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonctio qui va lire le fichier passé en paramètre et va retoruner tout son
+contenu.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">le nom du fichier à ouvrir</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Lève:</th><td class="field-body"><strong>IOError</strong> – les erreurs éventuelle sur la lecture du fichier.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="modules.Compression.paddin">
 <code class="descclassname">modules.Compression.</code><code class="descname">paddin</code><span class="sig-paren">(</span><em>binary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#paddin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.paddin" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p>Fonction qui permet d’ajouter du paddin à un nombre binaire. le nombre renvoyé
-est sur 9 bits.
-:param binary: un nombre binaire
-:return: le même nombre binaire mais sur 9 bits
-:raise: IOEerror retourne le code d’erreur de la classe IO.</p>
+est sur 9 bits.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">un nombre binaire</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return binary:</th><td class="field-body">le même nombre binaire mais sur 9 bits</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="modules.Compression.writteFile">
-<code class="descclassname">modules.Compression.</code><code class="descname">writteFile</code><span class="sig-paren">(</span><em>bytesString</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#writteFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.writteFile" title="Lien permanent vers cette définition">¶</a></dt>
-<dd></dd></dl>
+<code class="descclassname">modules.Compression.</code><code class="descname">writteFile</code><span class="sig-paren">(</span><em>bytesString</em>, <em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#writteFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.writteFile" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction qui permet d’écrire le contenu compresser dans un fichier binaire.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">la chaine compresser en binaire</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Lève:</th><td class="field-body"><strong>IOError</strong> – retourne le code d’erreur de la classe IO.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 <div class="section" id="module-modules.Decompression">

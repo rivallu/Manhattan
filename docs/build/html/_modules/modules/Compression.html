@@ -159,21 +159,39 @@
 
 <div class="viewcode-block" id="genDict"><a class="viewcode-back" href="../../modules.html#modules.Compression.genDict">[docs]</a><span class="k">def</span> <span class="nf">genDict</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fonction qui génère un dictionnaire</span>
-<span class="sd">    :return: le dictionnaire</span>
+<span class="sd">    Fonction qui génère un dictionnaire pour permettre la compression.</span>
+
+<span class="sd">    :return dico: le dictionnaire</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dico</span><span class="o">=</span><span class="p">{}</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">):</span>
         <span class="n">dico</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">):</span><span class="n">i</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">dico</span></div>
 
-<div class="viewcode-block" id="compress"><a class="viewcode-back" href="../../modules.html#modules.Compression.compress">[docs]</a><span class="k">def</span> <span class="nf">compress</span><span class="p">(</span><span class="n">String</span><span class="p">):</span>
+<div class="viewcode-block" id="compress"><a class="viewcode-back" href="../../modules.html#modules.Compression.compress">[docs]</a><span class="k">def</span> <span class="nf">compress</span><span class="p">(</span><span class="n">fileIn</span><span class="p">,</span><span class="n">fileOut</span><span class="p">,</span><span class="n">algo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fonction générique qui fait les appels au différentes fonctions pour compresser</span>
+<span class="sd">    en fonction de l&#39;algo donnée.</span>
+
+<span class="sd">    :param fileIn: Le fichier à compresser</span>
+<span class="sd">    :param fileOut: le fichier de sortie</span>
+<span class="sd">    :param algo: l&#39;algo utilisé pour la compression.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">algo</span><span class="o">==</span><span class="s2">&quot;lzw&quot;</span><span class="p">:</span>
+        <span class="n">datas</span><span class="o">=</span><span class="n">openFileToCompress</span><span class="p">(</span><span class="n">fileIn</span><span class="p">)</span>
+        <span class="n">writteFile</span><span class="p">(</span><span class="n">compressLZW</span><span class="p">(</span><span class="n">datas</span><span class="p">),</span><span class="n">fileOut</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="compressLZW"><a class="viewcode-back" href="../../modules.html#modules.Compression.compressLZW">[docs]</a><span class="k">def</span> <span class="nf">compressLZW</span><span class="p">(</span><span class="n">String</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fonction qui permet de compresser une chaine de caractère en</span>
 <span class="sd">    suivant l&#39;algo Lempel-Ziv-Welch.</span>
+
 <span class="sd">    :param: une chaine de caractère</span>
-<span class="sd">    :return: la chaine compressé</span>
+<span class="sd">    :return output: la chaine compressé</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
     <span class="n">output</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
     <span class="n">dico</span><span class="o">=</span><span class="n">genDict</span><span class="p">()</span>
     <span class="n">w</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
@@ -184,6 +202,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dico</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">element</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">dico</span><span class="p">)})</span>
             <span class="n">binary</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{0:b}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dico</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+            <span class="c1"># print(&#39;{} {}&#39;.format(letter,binary))</span>
             <span class="n">binary</span><span class="o">=</span><span class="n">paddin</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
             <span class="n">output</span><span class="o">+=</span><span class="n">binary</span>
             <span class="n">w</span><span class="o">=</span><span class="n">letter</span><span class="p">;</span>
@@ -193,33 +212,59 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fonction qui permet d&#39;ajouter du paddin à un nombre binaire. le nombre renvoyé</span>
 <span class="sd">    est sur 9 bits.</span>
-<span class="sd">    :param binary: un nombre binaire</span>
-<span class="sd">    :return: le même nombre binaire mais sur 9 bits</span>
-<span class="sd">    :raise: IOEerror retourne le code d&#39;erreur de la classe IO.</span>
+
+<span class="sd">    :param: un nombre binaire</span>
+<span class="sd">    :return binary: le même nombre binaire mais sur 9 bits</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">while</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">):</span>
         <span class="n">binary</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{0:b}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="n">binary</span>
     <span class="k">return</span> <span class="n">binary</span></div>
 
-<div class="viewcode-block" id="writteFile"><a class="viewcode-back" href="../../modules.html#modules.Compression.writteFile">[docs]</a><span class="k">def</span> <span class="nf">writteFile</span><span class="p">(</span><span class="n">bytesString</span><span class="p">):</span>
+<div class="viewcode-block" id="writteFile"><a class="viewcode-back" href="../../modules.html#modules.Compression.writteFile">[docs]</a><span class="k">def</span> <span class="nf">writteFile</span><span class="p">(</span><span class="n">bytesString</span><span class="p">,</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fonction qui permet d&#39;écrire le contenu compresser dans un fichier binaire.</span>
+
+<span class="sd">    :param: la chaine compresser en binaire</span>
+<span class="sd">    :raise IOError: retourne le code d&#39;erreur de la classe IO.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;archive.lzw&#39;</span><span class="p">,</span><span class="s1">&#39;wb+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archive</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;wb+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archive</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">bytesString</span><span class="p">),</span><span class="mi">8</span><span class="p">):</span>
                 <span class="n">hexString</span><span class="o">=</span><span class="n">bytesString</span><span class="p">[</span><span class="n">h</span><span class="p">:</span><span class="n">h</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span>
                 <span class="n">hexInt</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">hexString</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
                 <span class="n">archive</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">([</span><span class="n">hexInt</span><span class="p">]))</span>
             <span class="n">archive</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span></div>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;writteFile&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">error</span></div>
+
+<div class="viewcode-block" id="openFileToCompress"><a class="viewcode-back" href="../../modules.html#modules.Compression.openFileToCompress">[docs]</a><span class="k">def</span> <span class="nf">openFileToCompress</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fonctio qui va lire le fichier passé en paramètre et va retoruner tout son</span>
+<span class="sd">    contenu.</span>
+
+<span class="sd">    :param: le nom du fichier à ouvrir</span>
+<span class="sd">    :raise IOError:  les erreurs éventuelle sur la lecture du fichier.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">lines</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="n">lines</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">lines</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;openFileToCompress&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">error</span></div>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1"># assert(paddin(&#39;000001&#39;)==&#39;0000000001&#39;)</span>
     <span class="c1"># assert(paddin(&#39;000001&#39;)!=&#39;00000001&#39;)</span>
-    <span class="n">f</span><span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-    <span class="n">line</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span>
+    <span class="c1"># f= open(&quot;../test/test&quot;,&#39;r&#39;)</span>
+    <span class="c1"># line=f.read()</span>
+    <span class="c1"># f.close</span>
     <span class="c1"># print(compress(&quot;TOBEORNOTTOBEORTOBEORNOT&quot;))</span>
-    <span class="n">writteFile</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="s2">&quot;TOBEORNOTTOBEORTOBEORNOT&quot;</span><span class="p">))</span>
+    <span class="c1"># writteFile(compress(line))</span>
 </pre></div>
 
            </div>
