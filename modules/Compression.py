@@ -4,8 +4,9 @@
 
 def genDict():
     """
-    Fonction qui génère un dictionnaire pour permettre la compression
-    :return: le dictionnaire
+    Fonction qui génère un dictionnaire pour permettre la compression.
+
+    :return dico: le dictionnaire
     """
     dico={}
     for i in range(0,256):
@@ -15,7 +16,8 @@ def genDict():
 def compress(fileIn,fileOut,algo):
     """
     Fonction générique qui fait les appels au différentes fonctions pour compresser
-    en fonction de l'algo donnée
+    en fonction de l'algo donnée.
+
     :param fileIn: Le fichier à compresser
     :param fileOut: le fichier de sortie
     :param algo: l'algo utilisé pour la compression.
@@ -30,8 +32,9 @@ def compressLZW(String):
     """
     Fonction qui permet de compresser une chaine de caractère en
     suivant l'algo Lempel-Ziv-Welch.
+
     :param: une chaine de caractère
-    :return: la chaine compressé
+    :return output: la chaine compressé
     """
     print(String)
     output=''
@@ -54,8 +57,9 @@ def paddin(binary):
     """
     Fonction qui permet d'ajouter du paddin à un nombre binaire. le nombre renvoyé
     est sur 9 bits.
+
     :param: un nombre binaire
-    :return: le même nombre binaire mais sur 9 bits
+    :return binary: le même nombre binaire mais sur 9 bits
     """
     while(len(binary)<10):
         binary="{0:b}".format(0)+binary
@@ -64,8 +68,9 @@ def paddin(binary):
 def writteFile(bytesString,fileName):
     """
     Fonction qui permet d'écrire le contenu compresser dans un fichier binaire.
+
     :param: la chaine compresser en binaire
-    :raise: IOEerror retourne le code d'erreur de la classe IO.
+    :raise IOError: retourne le code d'erreur de la classe IO.
     """
     try:
         with open(fileName,'wb+') as archive:
@@ -84,7 +89,7 @@ def openFileToCompress(fileName):
     contenu.
 
     :param: le nom du fichier à ouvrir
-    :raise: IOError, les erreurs éventuelle sur la lecture du fichier.
+    :raise IOError:  les erreurs éventuelle sur la lecture du fichier.
     """
     try:
         with open(fileName,'r') as f:
