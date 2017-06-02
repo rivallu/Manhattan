@@ -36,7 +36,7 @@ def LectureFichier(chemin):
 
 def Decompress(caracteres):
 
-    resultat = open("C://Users//matth//Documents//ENSIBS//Programmation Objet//Manhattan//resultat.txt", 'w')
+    resultat = open("../resultat.txt", 'w')
     dictionnaire = []
 
     resultat.write(chr(int(caracteres[0], 2)))
