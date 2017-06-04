@@ -63,10 +63,12 @@ def compressLZW(String,fileName):
                     archive.write(bytes([hexInt]))
             while(len(nineBits)%4!=0):
                 nineBits="{0:b}".format(0)+binary
-            print("ninebits ="+nineBits)
+            print("ninebits = "+nineBits)
             archive.write(b'\n')
-            print(bytes([int(nineBits,2)]))
-            archive.write(bytes([int(nineBits,2)]))
+            for i in range(0,len(nineBits),8):
+                nineBytes=bytes([int(nineBits[i:i+8],2)])
+                archive.write(nineBytes)
+                print(nineBytes)
             archive.close()
     except IOError as error:
         print('writteFile')
