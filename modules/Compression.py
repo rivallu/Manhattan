@@ -45,12 +45,13 @@ def compressLZW(String,fileName):
         with open(fileName,'wb+') as archive:
             for letter in String:
                 element='{}{}'.format(w,letter)
+                if len(dico)==512:
+                    dico=genDict()
                 if element in dico:
                     w=element
                 else:
                     dico.update({element:len(dico)})
                     binary="{0:b}".format(dico.get(w))
-                    print('{} {}'.format(letter,binary))
 
                     if len(binary)==9:
                         nineBits+=binary[0]
@@ -58,18 +59,16 @@ def compressLZW(String,fileName):
                     else:
                         nineBits+='0'
                     hexInt=int(binary,2)
-                    print(binary,bytes([hexInt]))
                     output+=binary
+                    print("{} {} {} {}".format(w,len(binary),binary,hexInt))
                     w=letter;
                     archive.write(bytes([hexInt]))
             while(len(nineBits)%4!=0):
                 nineBits="{0:b}".format(0)+binary
-            print("ninebits = "+nineBits)
             archive.write(b'\n')
             for i in range(0,len(nineBits),8):
                 nineBytes=bytes([int(nineBits[i:i+8],2)])
                 archive.write(nineBytes)
-                print(nineBytes)
             archive.close()
     except IOError as error:
         print('writteFile')
