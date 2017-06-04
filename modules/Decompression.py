@@ -16,34 +16,40 @@ def startDecompress(fileName):
     """
     lines=LectureFichier(fileName)
     fileOut=fileName.split(".")[0]+".txt"
-    Decompress(lines,FileOut)
+    Decompress(lines,fileOut)
 
 def LectureFichier(chemin):
 
     fichier = open(chemin, 'rb')
 
     ligne = fichier.readlines()
-
+    
     binary = ""
 
-    for i in range(0, len(ligne[0])):
-        binary = binary + str(bin(ligne[0][i])) + " "
+    for i in range(0, len(ligne[0]), 2):
+        carac = []
+        carac.append(str(bin(ligne[0][i])))
+        carac.append(str(bin(ligne[0][i+1])))
+        n = len(carac[1])-2
+        zero = ""
+        for i in range(0, 8-n):
+            zero = zero + "0"
+        carac[1] = "0b" + zero + carac[1][2:]
+        print(carac)
+        binary = binary + "0b" + carac[0][-1] + carac[1][2:] + " "
 
+    print(binary)
     ligne = binary.split("0b")
     ligne.remove('')
+    print(ligne)
     fichier.close()
     return ligne
 
 
-<<<<<<< HEAD
-def Decompress(caracteres):
-    
-    resultat = open("../resultat.txt", 'w')
-=======
 def Decompress(caracteres,fileOut):
 
     resultat = open("fileOut", 'w')
->>>>>>> 8f066c70713eabe840a16e88a051bcde529b9fcc
+
     dictionnaire = []
 
     resultat.write(chr(int(caracteres[0], 2)))
