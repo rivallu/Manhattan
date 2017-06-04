@@ -24,11 +24,11 @@ def compress(fileIn,fileOut,algo):
     """
     if algo=="lzw":
         datas=openFileToCompress(fileIn)
-        writteFile(compressLZW(datas),fileOut)
+        compressLZW(datas,fileOut)
     else:
         print('Error')
 
-def compressLZW(String):
+def compressLZW(String,fileName):
     """
     Fonction qui permet de compresser une chaine de caractère en
     suivant l'algo Lempel-Ziv-Welch.
@@ -39,19 +39,38 @@ def compressLZW(String):
     print(String)
     output=''
     dico=genDict()
+    nineBits=''
     w=''
-    for letter in String:
-        element='{}{}'.format(w,letter)
-        if element in dico:
-            w=element
-        else:
-            dico.update({element:len(dico)})
-            binary="{0:b}".format(dico.get(w))
-            # print('{} {}'.format(letter,binary))
-            binary=paddin(binary)
-            output+=binary
-            w=letter;
-    return output
+    try:
+        with open(fileName,'wb+') as archive:
+            for letter in String:
+                element='{}{}'.format(w,letter)
+                if element in dico:
+                    w=element
+                else:
+                    dico.update({element:len(dico)})
+                    binary="{0:b}".format(dico.get(w))
+                    print('{} {}'.format(letter,binary))
+
+                    if len(binary)==9:
+                        nineBits+=binary[0]
+                    else:
+                        nineBits+='0'
+                    hexInt=int(binary[1:],2)
+                    print(binary,bytes([hexInt]))
+                    output+=binary
+                    w=letter;
+                    archive.write(bytes([hexInt]))
+            while(len(nineBits)%4!=0):
+                nineBits="{0:b}".format(0)+binary
+            print("ninebits ="+nineBits)
+            archive.write(b'\n')
+            print(bytes([int(nineBits,2)]))
+            archive.write(bytes([int(nineBits,2)]))
+            archive.close()
+    except IOError as error:
+        print('writteFile')
+        raise error
 
 def paddin(binary):
     """
@@ -65,23 +84,21 @@ def paddin(binary):
         binary="{0:b}".format(0)+binary
     return binary
 
-def writteFile(bytesString,fileName):
-    """
-    Fonction qui permet d'écrire le contenu compresser dans un fichier binaire.
-
-    :param: la chaine compresser en binaire
-    :raise IOError: retourne le code d'erreur de la classe IO.
-    """
-    try:
-        with open(fileName,'wb+') as archive:
-            for h in range(0,len(bytesString),8):
-                hexString=bytesString[h:h+8]
-                hexInt=int(hexString,2)
-                archive.write(bytes([hexInt]))
-            archive.close()
-    except IOError as error:
-        print('writteFile')
-        raise error
+# def writteFile(bytesString,fileName):
+#     """
+#     Fonction qui permet d'écrire le contenu compresser dans un fichier binaire.
+#
+#     :param: la chaine compresser en binaire
+#     :raise IOError: retourne le code d'erreur de la classe IO.
+#     """
+#     try:
+#         with open(fileName,'wb+') as archive:
+#
+#                 archive.write(bytes([hexInt]))
+#             archive.close()
+#     except IOError as error:
+#         print('writteFile')
+#         raise error
 
 def openFileToCompress(fileName):
     """
