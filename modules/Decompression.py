@@ -3,6 +3,7 @@
 
 
 def CinDico(caractere, dictionnaire):
+    
     test = -1
     for i in range(0, len(dictionnaire)):
         if caractere == dictionnaire[i][0]:
@@ -29,13 +30,12 @@ def LectureFichier(chemin):
 
     ligne = binary.split("0b")
     ligne.remove('')
-
     fichier.close()
     return ligne
 
 
 def Decompress(caracteres):
-
+    
     resultat = open("../resultat.txt", 'w')
     dictionnaire = []
 
