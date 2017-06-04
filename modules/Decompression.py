@@ -25,6 +25,16 @@ def LectureFichier(chemin):
     ligne = fichier.readlines()
     
     binary = ""
+    print(ligne)
+    print("\n")
+    n = len(ligne)
+    for i in range(1, n-1):
+        ligne[0] = ligne[0] + ligne[i]
+    print(ligne)
+    print("\n")
+    ligne = [ligne[0], ligne[-1]]
+    print(ligne) 
+    print("\n")
     
     for i in range(0, len(ligne[1])):
         bit9 = str(bin(ligne[1][i]))
@@ -44,10 +54,10 @@ def LectureFichier(chemin):
             carac = "0b" + zero + carac[2:]
             binary = binary + "0b" + bit9[j] + carac[2:] + " "
 
-    print(binary)
     ligne = binary.split("0b")
     ligne.remove('')
     print(ligne)
+    print("\n")
     fichier.close()
     return ligne
 
@@ -73,14 +83,15 @@ def Decompress(caracteres,fileOut):
             entree = chr(test_code)
 
         resultat.write(entree)
-
+        
+        if len(dictionnaire) == 256 :
+            dictionnaire = []
+            
         try :
             dictionnaire.append([dictionnaire[-1][0] + 1, w + entree[0]])
         except IndexError :
             dictionnaire.append([256, w + entree[0]])
         
-        if len(dictionnaire) == 256 :
-            dictionnaire = []
         w = entree
 
     print(dictionnaire)
