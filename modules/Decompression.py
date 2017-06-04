@@ -25,18 +25,24 @@ def LectureFichier(chemin):
     ligne = fichier.readlines()
     
     binary = ""
-
-    for i in range(0, len(ligne[0]), 2):
-        carac = []
-        carac.append(str(bin(ligne[0][i])))
-        carac.append(str(bin(ligne[0][i+1])))
-        n = len(carac[1])-2
+    
+    for i in range(0, len(ligne[1])):
+        bit9 = str(bin(ligne[1][i]))
+        n = len(bit9)-2
+        
         zero = ""
-        for i in range(0, 8-n):
+        for k in range(0, 8-n):
             zero = zero + "0"
-        carac[1] = "0b" + zero + carac[1][2:]
-        print(carac)
-        binary = binary + "0b" + carac[0][-1] + carac[1][2:] + " "
+        bit9 = zero + bit9[2:]
+        
+        for j in range(0, len(bit9)) :
+            carac = str(bin(ligne[0][8*i + j]))
+            n = len(carac) - 2
+            zero = ""
+            for k in range(0, 8-n):
+                zero = zero + "0"
+            carac = "0b" + zero + carac[2:]
+            binary = binary + "0b" + bit9[j] + carac[2:] + " "
 
     print(binary)
     ligne = binary.split("0b")
