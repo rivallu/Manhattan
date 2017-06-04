@@ -54,9 +54,10 @@ def compressLZW(String,fileName):
 
                     if len(binary)==9:
                         nineBits+=binary[0]
+                        binary=binary[1:]
                     else:
                         nineBits+='0'
-                    hexInt=int(binary[1:],2)
+                    hexInt=int(binary,2)
                     print(binary,bytes([hexInt]))
                     output+=binary
                     w=letter;
