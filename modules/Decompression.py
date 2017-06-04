@@ -78,7 +78,9 @@ def Decompress(caracteres,fileOut):
             dictionnaire.append([dictionnaire[-1][0] + 1, w + entree[0]])
         except IndexError :
             dictionnaire.append([256, w + entree[0]])
-
+        
+        if len(dictionnaire) == 256 :
+            dictionnaire = []
         w = entree
 
     print(dictionnaire)
