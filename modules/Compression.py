@@ -61,7 +61,7 @@ def paddin(binary):
     :param: un nombre binaire
     :return binary: le même nombre binaire mais sur 9 bits
     """
-    while(len(binary)<10):
+    while(len(binary)<16):
         binary="{0:b}".format(0)+binary
     return binary
 

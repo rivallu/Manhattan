@@ -15,7 +15,8 @@ def startDecompress(fileName):
 
     """
     lines=LectureFichier(fileName)
-    Decompress(lines)
+    fileOut=fileName.split(".")[0]+".txt"
+    Decompress(lines,FileOut)
 
 def LectureFichier(chemin):
 
@@ -34,9 +35,15 @@ def LectureFichier(chemin):
     return ligne
 
 
+<<<<<<< HEAD
 def Decompress(caracteres):
     
     resultat = open("../resultat.txt", 'w')
+=======
+def Decompress(caracteres,fileOut):
+
+    resultat = open("fileOut", 'w')
+>>>>>>> 8f066c70713eabe840a16e88a051bcde529b9fcc
     dictionnaire = []
 
     resultat.write(chr(int(caracteres[0], 2)))
