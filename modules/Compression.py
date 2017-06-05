@@ -36,7 +36,6 @@ def compressLZW(String,fileName):
     :param: une chaine de caractère
     :return output: la chaine compressé
     """
-    print(String)
     output=''
     dico=genDict()
     nineBits=''
@@ -46,7 +45,6 @@ def compressLZW(String,fileName):
             for letter in String:
                 element='{}{}'.format(w,letter)
                 if len(dico)==512:
-                    print(dico)
                     dico=genDict()
                 if element in dico:
                     w=element
@@ -61,50 +59,17 @@ def compressLZW(String,fileName):
                     hexInt=int(binary,2)
                     w=letter;
                     archive.write(bytes([hexInt]))
-            print(dico)
-            print(nineBits)
             for i in range(0,len(nineBits)%8):
                 nineBits=nineBits+("{0:b}".format(0))*(8 - len(nineBits)%8)
-            print(nineBits)
             archive.write(b'\n')
             archive.write(b'\n')
             print(nineBits)
             for i in range(0,len(nineBits),8):
                 nineBytes=bytes([int(nineBits[i:i+8],2)])
-                print("{} {}".format(nineBits[i:i+8],nineBytes))
                 archive.write(nineBytes)
             archive.close()
     except IOError as error:
-        print('writteFile')
         raise error
-
-def paddin(binary):
-    """
-    Fonction qui permet d'ajouter du paddin à un nombre binaire. le nombre renvoyé
-    est sur 9 bits.
-
-    :param: un nombre binaire
-    :return binary: le même nombre binaire mais sur 9 bits
-    """
-    while(len(binary)<16):
-        binary="{0:b}".format(0)+binary
-    return binary
-
-# def writteFile(bytesString,fileName):
-#     """
-#     Fonction qui permet d'écrire le contenu compresser dans un fichier binaire.
-#
-#     :param: la chaine compresser en binaire
-#     :raise IOError: retourne le code d'erreur de la classe IO.
-#     """
-#     try:
-#         with open(fileName,'wb+') as archive:
-#
-#                 archive.write(bytes([hexInt]))
-#             archive.close()
-#     except IOError as error:
-#         print('writteFile')
-#         raise error
 
 def openFileToCompress(fileName):
     """
@@ -121,7 +86,6 @@ def openFileToCompress(fileName):
             f.close()
             return lines
     except IOError as error:
-        print('openFileToCompress')
         raise error
 
 if __name__ == '__main__':
