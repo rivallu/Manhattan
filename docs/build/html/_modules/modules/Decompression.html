@@ -158,64 +158,100 @@
 
 
 <div class="viewcode-block" id="CinDico"><a class="viewcode-back" href="../../modules.html#modules.Decompression.CinDico">[docs]</a><span class="k">def</span> <span class="nf">CinDico</span><span class="p">(</span><span class="n">caractere</span><span class="p">,</span> <span class="n">dictionnaire</span><span class="p">):</span>
-    <span class="n">test</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="n">test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionnaire</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">caractere</span> <span class="o">==</span> <span class="n">dictionnaire</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">test</span> <span class="o">=</span> <span class="n">i</span>
     <span class="k">return</span> <span class="n">test</span></div>
 
+<div class="viewcode-block" id="startDecompress"><a class="viewcode-back" href="../../modules.html#modules.Decompression.startDecompress">[docs]</a><span class="k">def</span> <span class="nf">startDecompress</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Decompress"><a class="viewcode-back" href="../../modules.html#modules.Decompression.Decompress">[docs]</a><span class="k">def</span> <span class="nf">Decompress</span><span class="p">():</span>
-    <span class="n">fichier</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;C://Users//matth//Documents//ENSIBS//Programmation Objet//Manhattan//test//archive.lzw&quot;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-    <span class="n">resultat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;resultat.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lines</span><span class="o">=</span><span class="n">LectureFichier</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+    <span class="n">fileOut</span><span class="o">=</span><span class="n">fileName</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;.txt&quot;</span>
+    <span class="n">Decompress</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="n">fileOut</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LectureFichier"><a class="viewcode-back" href="../../modules.html#modules.Decompression.LectureFichier">[docs]</a><span class="k">def</span> <span class="nf">LectureFichier</span><span class="p">(</span><span class="n">chemin</span><span class="p">):</span>
+
+    <span class="n">fichier</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">chemin</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
 
     <span class="n">ligne</span> <span class="o">=</span> <span class="n">fichier</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-
+    
     <span class="n">binary</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">ligne</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ligne</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">ligne</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ligne</span> <span class="o">=</span> <span class="p">[</span><span class="n">ligne</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ligne</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
+        <span class="n">bit9</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bit9</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span>
+        
+        <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="o">-</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">zero</span> <span class="o">=</span> <span class="n">zero</span> <span class="o">+</span> <span class="s2">&quot;0&quot;</span>
+        <span class="n">bit9</span> <span class="o">=</span> <span class="n">zero</span> <span class="o">+</span> <span class="n">bit9</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bit9</span><span class="p">))</span> <span class="p">:</span>
+            <span class="n">carac</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">8</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]))</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">carac</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span>
+            <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="o">-</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">zero</span> <span class="o">=</span> <span class="n">zero</span> <span class="o">+</span> <span class="s2">&quot;0&quot;</span>
+            <span class="n">carac</span> <span class="o">=</span> <span class="s2">&quot;0b&quot;</span> <span class="o">+</span> <span class="n">zero</span> <span class="o">+</span> <span class="n">carac</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+            <span class="n">binary</span> <span class="o">=</span> <span class="n">binary</span> <span class="o">+</span> <span class="s2">&quot;0b&quot;</span> <span class="o">+</span> <span class="n">bit9</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">carac</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
-        <span class="n">binary</span> <span class="o">=</span> <span class="n">binary</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="mi">16</span><span class="p">)))</span>
+    <span class="n">ligne</span> <span class="o">=</span> <span class="n">binary</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;0b&quot;</span><span class="p">)</span>
+    <span class="n">ligne</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fichier</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ligne</span></div>
 
-    <span class="n">caracteres</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="Decompress"><a class="viewcode-back" href="../../modules.html#modules.Decompression.Decompress">[docs]</a><span class="k">def</span> <span class="nf">Decompress</span><span class="p">(</span><span class="n">caracteres</span><span class="p">,</span><span class="n">fileOut</span><span class="p">):</span>
+
+    <span class="n">resultat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;fileOut&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
     <span class="n">dictionnaire</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">binary</span><span class="p">),</span> <span class="mi">10</span><span class="p">):</span>
-        <span class="n">caracteres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">10</span><span class="p">])</span>
-
-    <span class="n">resultat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">char</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">resultat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">)))</span>
     <span class="n">w</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">caracteres</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">255</span> <span class="ow">and</span> <span class="n">CinDico</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dictionnaire</span><span class="p">)</span> <span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionnaire</span><span class="p">))</span> <span class="p">:</span>
-                <span class="k">if</span> <span class="n">dictionnaire</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span> <span class="p">:</span>
-                    <span class="n">entree</span> <span class="o">=</span> <span class="n">dictionnaire</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="k">break</span>
-        <span class="k">elif</span> <span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">255</span> <span class="ow">and</span> <span class="n">CinDico</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dictionnaire</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="p">:</span>
+        <span class="n">presence</span> <span class="o">=</span> <span class="n">CinDico</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dictionnaire</span><span class="p">)</span>
+        <span class="n">test_code</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">test_code</span> <span class="o">&gt;</span> <span class="mi">255</span> <span class="ow">and</span>  <span class="n">presence</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="p">:</span>
+            <span class="n">entree</span> <span class="o">=</span> <span class="n">dictionnaire</span><span class="p">[</span><span class="n">presence</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="n">test_code</span> <span class="o">&gt;</span> <span class="mi">255</span> <span class="ow">and</span> <span class="n">presence</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">:</span>
             <span class="n">entree</span> <span class="o">=</span> <span class="n">w</span> <span class="o">+</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">else</span> <span class="p">:</span>
-            <span class="n">entree</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">caracteres</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="n">entree</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">test_code</span><span class="p">)</span>
+
         <span class="n">resultat</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">entree</span><span class="p">)</span>
-        <span class="n">dictionnaire</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">dictionnaire</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span> <span class="o">+</span> <span class="n">entree</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionnaire</span><span class="p">)</span> <span class="o">==</span> <span class="mi">256</span> <span class="p">:</span>
+            <span class="n">dictionnaire</span> <span class="o">=</span> <span class="p">[]</span>
+            
+        <span class="k">try</span> <span class="p">:</span>
+            <span class="n">dictionnaire</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">dictionnaire</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span> <span class="o">+</span> <span class="n">entree</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">except</span> <span class="ne">IndexError</span> <span class="p">:</span>
+            <span class="n">dictionnaire</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">256</span><span class="p">,</span> <span class="n">w</span> <span class="o">+</span> <span class="n">entree</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        
         <span class="n">w</span> <span class="o">=</span> <span class="n">entree</span>
 
-    <span class="n">fichier</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dictionnaire</span><span class="p">)</span>
     <span class="n">resultat</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-
-    <span class="c1">#exctraction du caractère</span>
-    <span class="c1">#w = c</span>
-    <span class="c1">#dictionnaire = []</span>
-
-    <span class="c1">#while c != &#39;&#39; :</span>
-        <span class="c1">#if c &gt; 255 and CinDico(c, dictionnaire) :</span>
-            <span class="c1">#entree =</span>
-
-    <span class="n">dictionnaire</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">caracteres</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="s2">&quot;Opération Réussie !&quot;</span></div>
 </pre></div>
 
            </div>

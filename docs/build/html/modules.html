@@ -189,7 +189,7 @@ en fonction de l’algo donnée.</p>
 
 <dl class="function">
 <dt id="modules.Compression.compressLZW">
-<code class="descclassname">modules.Compression.</code><code class="descname">compressLZW</code><span class="sig-paren">(</span><em>String</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#compressLZW"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.compressLZW" title="Lien permanent vers cette définition">¶</a></dt>
+<code class="descclassname">modules.Compression.</code><code class="descname">compressLZW</code><span class="sig-paren">(</span><em>String</em>, <em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#compressLZW"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.compressLZW" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p>Fonction qui permet de compresser une chaine de caractère en
 suivant l’algo Lempel-Ziv-Welch.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -252,22 +252,6 @@ est sur 9 bits.</p>
 </table>
 </dd></dl>
 
-<dl class="function">
-<dt id="modules.Compression.writteFile">
-<code class="descclassname">modules.Compression.</code><code class="descname">writteFile</code><span class="sig-paren">(</span><em>bytesString</em>, <em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#writteFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.writteFile" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Fonction qui permet d’écrire le contenu compresser dans un fichier binaire.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">la chaine compresser en binaire</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Lève:</th><td class="field-body"><strong>IOError</strong> – retourne le code d’erreur de la classe IO.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 <div class="section" id="module-modules.Decompression">
 <span id="modules-decompression-module"></span><h2>modules.Decompression module<a class="headerlink" href="#module-modules.Decompression" title="Lien permanent vers ce titre">¶</a></h2>
@@ -278,7 +262,17 @@ est sur 9 bits.</p>
 
 <dl class="function">
 <dt id="modules.Decompression.Decompress">
-<code class="descclassname">modules.Decompression.</code><code class="descname">Decompress</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#Decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.Decompress" title="Lien permanent vers cette définition">¶</a></dt>
+<code class="descclassname">modules.Decompression.</code><code class="descname">Decompress</code><span class="sig-paren">(</span><em>caracteres</em>, <em>fileOut</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#Decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.Decompress" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="modules.Decompression.LectureFichier">
+<code class="descclassname">modules.Decompression.</code><code class="descname">LectureFichier</code><span class="sig-paren">(</span><em>chemin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#LectureFichier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.LectureFichier" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="modules.Decompression.startDecompress">
+<code class="descclassname">modules.Decompression.</code><code class="descname">startDecompress</code><span class="sig-paren">(</span><em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#startDecompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.startDecompress" title="Lien permanent vers cette définition">¶</a></dt>
 <dd></dd></dl>
 
 </div>

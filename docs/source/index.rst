@@ -5,11 +5,10 @@
 
 Welcome to Manhattan's documentation!
 =====================================
-
+.. include:: intro.rst
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
 
 
 Indices and tables
