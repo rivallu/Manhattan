@@ -63,7 +63,6 @@ def compressLZW(String,fileName):
                 nineBits=nineBits+("{0:b}".format(0))*(8 - len(nineBits)%8)
             archive.write(b'\n')
             archive.write(b'\n')
-            print(nineBits)
             for i in range(0,len(nineBits),8):
                 nineBytes=bytes([int(nineBits[i:i+8],2)])
                 archive.write(nineBytes)

@@ -3,6 +3,7 @@
 
 from modules import Compression
 from modules import Decompression
+from os import path
 import argparse
 import time
 import datetime
@@ -17,9 +18,6 @@ def parse_args():
     parser.add_argument('--extract', '-x',
                         action='store_true',
                         help='extract files from an archive')
-    parser.add_argument('--verbose', '-v',
-                        action='store_true',
-                        help='verbosely list files processed')
     parser.add_argument('--create', '-c',
                         action='store_true',
                         help='verbosely list files processed')
@@ -48,11 +46,14 @@ tps1 = time.time()
 
 if arg.create:
     print('Début de la compression')
+    pathFile=path.dirname(arg.file)
     if arg.output is not None:
-        fileName=arg.output+'.lzw'
+        fileName=pathFile+'/'+arg.output+'.lzw'
     else:
-        fileName='archive.lzw'
+        pathFile=path.dirname(arg.file)
+        fileName=pathFile+'/'+'archive.lzw'
     try:
+        # Todo: gestion du chemin
         Compression.compress(arg.file,fileName,"lzw")
     except Exception as error:
         print(error)
@@ -60,15 +61,13 @@ if arg.create:
 elif arg.extract:
     print('Début de la décompression')
     try:
-        Decompression.startDecompress(arg.fileName)
-
-    except Exception as e:
+        Decompression.startDecompress(arg.file)
+    except Exception as error:
         print(error)
-
 else:
     print('Error')
 
 tps2 = time.time()
 totalTime=tps2-tps1
 totalTime=convertToH(totalTime)
-print(totalTime)
+print("la durée total de l'opération est de {}".format(totalTime))
