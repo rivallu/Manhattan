@@ -3,7 +3,16 @@
 
 
 def CinDico(caractere, dictionnaire):
-
+    
+    """
+    Fonction permettant de détecter la présence d'un code dans le dictionnaire construit par Decompress.
+    
+    Elle retourne -1 si le code ne s'y trouve pas. Elle retourne la position du code dans la liste en cas de détection. Cela permet à Decompress de récupérer la suite de caractères correspondante.
+    
+    :param caractere: Paramètre correspondant au code d'un caractère ou d'une suite de caractères compressé.
+    :param dictionnaire: Liste correspondant au dictionnaire en cours d'utilisation et construit par Decompress()
+    """
+    
     test = -1
     for i in range(0, len(dictionnaire)):
         if caractere == dictionnaire[i][0]:
@@ -12,14 +21,32 @@ def CinDico(caractere, dictionnaire):
 
 def startDecompress(fileName):
     """
-
+    Fonction générique permettant de décompresser suivant l'algorithme de compression utilisé.
+    
+    :param fileName: Chemin d'accès de l'archive dont on souhaite la décompression.
     """
     lines=LectureFichier(fileName)
     fileOut=fileName.split(".")[0]+".txt"
     Decompress(lines,fileOut)
 
 def LectureFichier(chemin):
-
+    
+    """
+    Fonction permettant de lire l'archive et de produire une liste formatée pour la décompression par la fonction Decompress().
+    
+    LectureFichier produit d'abord une liste contenant chaque ligne de l'archive compressée.
+    
+    La compression ayant ajouté 2 "\n" dans l'archive, LectureFichier cherche donc un élément de la liste correspondant à "b'\n'" afin de collecter tout ce qui se toruve avant comme étant du texte à décoder et tout ce qui se trouve après comme étant le bit de poids fort manquant à chaque caractère.
+    
+    Par la suite, LectureFichier lit chaque bit de poids fort et l'ajoute au code du caractère auquel il devrait appartenir.
+    
+    Enfin, chaque code est casté en string puis le "0b" restant suite au cast est retiré afin de ne garder qu'une suite de bit.
+    
+    Enfin, la fonction retourne la liste correctement formatée et exploitable par Decompress()
+    
+    :param chemin: Paramètre contenant le chemin d'accès de l'archive à décompresser.
+    """
+    
     fichier = open(chemin, 'rb')
 
     ligne = fichier.readlines()
@@ -69,7 +96,16 @@ def LectureFichier(chemin):
 
 
 def Decompress(caracteres,fileOut):
-
+    
+    """
+    Decompress est la fonction servant à décoder un texte compressé en suivant la méthode de l'algorithme LZW.
+    
+    Elle s'appuie sur la fonction LectureFichier afin de recevoir une liste correctement formatée pour la décompression.
+    
+    :param caracteres: Il s'agit d'une liste dont chaque élément correspond au code ASCII ou du dictionnaire d'un caractère ou d'une suite de caractère compressé. Ce code doit être exprimé en bit, type string sans le 0b ajouté par le type bytes. LectureFichier() peut fournir une telle liste formatée à partir d'un fichier texte.
+    :param fileOut: Paramètre contenant le chemin d'accès souhaité par l'utilisateur pour écriture du fichier décompressé.
+    """
+    
     resultat = open(fileOut, 'w')
 
     dictionnaire = []
