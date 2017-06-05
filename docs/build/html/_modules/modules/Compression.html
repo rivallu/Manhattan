@@ -161,7 +161,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fonction qui génère un dictionnaire pour permettre la compression.</span>
 
-<span class="sd">    :return dico: le dictionnaire</span>
+<span class="sd">    :return dico: le dictionnaire contenant les caractères ASCII étendu et leur code en décimal.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dico</span><span class="o">=</span><span class="p">{}</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">):</span>
@@ -170,12 +170,11 @@
 
 <div class="viewcode-block" id="compress"><a class="viewcode-back" href="../../modules.html#modules.Compression.compress">[docs]</a><span class="k">def</span> <span class="nf">compress</span><span class="p">(</span><span class="n">fileIn</span><span class="p">,</span><span class="n">fileOut</span><span class="p">,</span><span class="n">algo</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fonction générique qui fait les appels au différentes fonctions pour compresser</span>
-<span class="sd">    en fonction de l&#39;algo donnée.</span>
+<span class="sd">    Fonction générique qui fait les appels aux différentes fonctions pour compresser selon l&#39;algorithme sélectionné.</span>
 
-<span class="sd">    :param fileIn: Le fichier à compresser</span>
-<span class="sd">    :param fileOut: le fichier de sortie</span>
-<span class="sd">    :param algo: l&#39;algo utilisé pour la compression.</span>
+<span class="sd">    :param fileIn: Le fichier à compresser.</span>
+<span class="sd">    :param fileOut: le fichier de sortie.</span>
+<span class="sd">    :param algo: l&#39;algorithme utilisé pour la compression.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">algo</span><span class="o">==</span><span class="s2">&quot;lzw&quot;</span><span class="p">:</span>
         <span class="n">datas</span><span class="o">=</span><span class="n">openFileToCompress</span><span class="p">(</span><span class="n">fileIn</span><span class="p">)</span>
@@ -185,11 +184,11 @@
 
 <div class="viewcode-block" id="compressLZW"><a class="viewcode-back" href="../../modules.html#modules.Compression.compressLZW">[docs]</a><span class="k">def</span> <span class="nf">compressLZW</span><span class="p">(</span><span class="n">String</span><span class="p">,</span><span class="n">fileName</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fonction qui permet de compresser une chaine de caractère en</span>
-<span class="sd">    suivant l&#39;algo Lempel-Ziv-Welch.</span>
+<span class="sd">    Fonction qui permet de compresser une chaine de caractères en</span>
+<span class="sd">    suivant l&#39;algorithme Lempel-Ziv-Welch.</span>
 
-<span class="sd">    :param: une chaine de caractère</span>
-<span class="sd">    :return output: la chaine compressé</span>
+<span class="sd">    :param: Chaîne de caractères devant être compressée. A fournir avec le type string.</span>
+<span class="sd">    :param fileName: Le chemin d&#39;accès du fichier à compresser.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">output</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
     <span class="n">dico</span><span class="o">=</span><span class="n">genDict</span><span class="p">()</span>
@@ -227,11 +226,11 @@
 
 <div class="viewcode-block" id="openFileToCompress"><a class="viewcode-back" href="../../modules.html#modules.Compression.openFileToCompress">[docs]</a><span class="k">def</span> <span class="nf">openFileToCompress</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fonctio qui va lire le fichier passé en paramètre et va retoruner tout son</span>
-<span class="sd">    contenu.</span>
+<span class="sd">    Fonction lisant le fichier passé en paramètre et retournant son contenu.</span>
 
-<span class="sd">    :param: le nom du fichier à ouvrir</span>
-<span class="sd">    :raise IOError:  les erreurs éventuelle sur la lecture du fichier.</span>
+<span class="sd">    :param fileName: Le chemin d&#39;accès du fichier à lire.</span>
+<span class="sd">    :raise IOError:  Les erreurs éventuelles sur la lecture du fichier.. Les erreurs</span>
+<span class="sd">    sont renvoyé dans Manhattan.py où les erreurs seront géré (affiché à l&#39;utilisateur).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>

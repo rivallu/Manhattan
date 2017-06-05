@@ -162,10 +162,10 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fonction permettant de détecter la présence d&#39;un code dans le dictionnaire construit par Decompress.</span>
 <span class="sd">    </span>
-<span class="sd">    Elle retourne -1 si le code ne s&#39;y trouve pas. Elle retourne la position du code dans la liste en cas de détection. Cela permet à Decompress de récupérer la suite de caractères correspondante.</span>
-<span class="sd">    </span>
 <span class="sd">    :param caractere: Paramètre correspondant au code d&#39;un caractère ou d&#39;une suite de caractères compressé.</span>
 <span class="sd">    :param dictionnaire: Liste correspondant au dictionnaire en cours d&#39;utilisation et construit par Decompress()</span>
+<span class="sd">    </span>
+<span class="sd">    :return test: Variable de type Integer ayant pour valeur -1 si le code ne se trouve pas dans le dictionnaire entrée en paramètre ou la position du code dans le dictionnaire en cas de détection. Cela permet à Decompress de récupérer la suite de caractères correspondante.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
@@ -200,6 +200,10 @@
 <span class="sd">    Enfin, la fonction retourne la liste correctement formatée et exploitable par Decompress()</span>
 <span class="sd">    </span>
 <span class="sd">    :param chemin: Paramètre contenant le chemin d&#39;accès de l&#39;archive à décompresser.</span>
+<span class="sd">    </span>
+<span class="sd">    :raise IndexError: Afin de coder les 9ème bits en hexadecimal, il a fallu ajouter des 0 non significatifs à la fin de la liste des 9ème bits. En effet, nous devions posséder une liste de 9ème bits divisible par 8 pour coder en hexadécimal d&#39;où l&#39;ajout de zéro. Cela entraîne ici une erreur IndexError étant donné qu&#39;il n&#39;existe pas de code en hexadécimal pour les 9ème bits ajoutés artificiellement. On sort alors de la boucle for en provoquant un break une fois cette erreur rencontrée (qui correspondra donc au premier 9ème bits non significatifs).</span>
+<span class="sd">    </span>
+<span class="sd">    :return ligne: Liste formatée des codes de caractères sur 9 bits prête à être interprêtée par Decompress()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">fichier</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">chemin</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
@@ -259,6 +263,8 @@
 <span class="sd">    </span>
 <span class="sd">    :param caracteres: Il s&#39;agit d&#39;une liste dont chaque élément correspond au code ASCII ou du dictionnaire d&#39;un caractère ou d&#39;une suite de caractère compressé. Ce code doit être exprimé en bit, type string sans le 0b ajouté par le type bytes. LectureFichier() peut fournir une telle liste formatée à partir d&#39;un fichier texte.</span>
 <span class="sd">    :param fileOut: Paramètre contenant le chemin d&#39;accès souhaité par l&#39;utilisateur pour écriture du fichier décompressé.</span>
+<span class="sd">    </span>
+<span class="sd">    :raise IndexError: Lors du premier ajout au dictionnaire, la liste est vide. Or, dans le try, nous essayons de récupérer le dernier indice du code ajouté au dictionnaire. Cela générère une erreur IndexError qui est gérée dans le except. En effet, dans ce cas, nous ajoutons au dictionnaire le code avec pour indice 256 ce qui permet de l&#39;initialiser et de ne plus rencontrer l&#39;erreur par la suite.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">resultat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileOut</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>

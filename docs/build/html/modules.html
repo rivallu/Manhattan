@@ -170,16 +170,15 @@
 <dl class="function">
 <dt id="modules.Compression.compress">
 <code class="descclassname">modules.Compression.</code><code class="descname">compress</code><span class="sig-paren">(</span><em>fileIn</em>, <em>fileOut</em>, <em>algo</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#compress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.compress" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Fonction générique qui fait les appels au différentes fonctions pour compresser
-en fonction de l’algo donnée.</p>
+<dd><p>Fonction générique qui fait les appels aux différentes fonctions pour compresser selon l’algorithme sélectionné.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
-<li><strong>fileIn</strong> – Le fichier à compresser</li>
-<li><strong>fileOut</strong> – le fichier de sortie</li>
-<li><strong>algo</strong> – l’algo utilisé pour la compression.</li>
+<li><strong>fileIn</strong> – Le fichier à compresser.</li>
+<li><strong>fileOut</strong> – le fichier de sortie.</li>
+<li><strong>algo</strong> – l’algorithme utilisé pour la compression.</li>
 </ul>
 </td>
 </tr>
@@ -190,15 +189,15 @@ en fonction de l’algo donnée.</p>
 <dl class="function">
 <dt id="modules.Compression.compressLZW">
 <code class="descclassname">modules.Compression.</code><code class="descname">compressLZW</code><span class="sig-paren">(</span><em>String</em>, <em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#compressLZW"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.compressLZW" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Fonction qui permet de compresser une chaine de caractère en
-suivant l’algo Lempel-Ziv-Welch.</p>
+<dd><p>Fonction qui permet de compresser une chaine de caractères en
+suivant l’algorithme Lempel-Ziv-Welch.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">une chaine de caractère</td>
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">Chaîne de caractères devant être compressée. A fournir avec le type string.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return output:</th><td class="field-body">la chaine compressé</td>
+<tr class="field-even field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fileName</strong> – Le chemin d’accès du fichier à compresser.</td>
 </tr>
 </tbody>
 </table>
@@ -212,7 +211,7 @@ suivant l’algo Lempel-Ziv-Welch.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return dico:</th><td class="field-body">le dictionnaire</td>
+<tr class="field-odd field"><th class="field-name">Return dico:</th><td class="field-body">le dictionnaire contenant les caractères ASCII étendu et leur code en décimal.</td>
 </tr>
 </tbody>
 </table>
@@ -221,18 +220,18 @@ suivant l’algo Lempel-Ziv-Welch.</p>
 <dl class="function">
 <dt id="modules.Compression.openFileToCompress">
 <code class="descclassname">modules.Compression.</code><code class="descname">openFileToCompress</code><span class="sig-paren">(</span><em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Compression.html#openFileToCompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Compression.openFileToCompress" title="Lien permanent vers cette définition">¶</a></dt>
-<dd><p>Fonctio qui va lire le fichier passé en paramètre et va retoruner tout son
-contenu.</p>
+<dd><p>Fonction lisant le fichier passé en paramètre et retournant son contenu.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">le nom du fichier à ouvrir</td>
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fileName</strong> – Le chemin d’accès du fichier à lire.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Lève:</th><td class="field-body"><strong>IOError</strong> – les erreurs éventuelle sur la lecture du fichier.</td>
+<tr class="field-even field"><th class="field-name">Lève:</th><td class="field-body"><strong>IOError</strong> – Les erreurs éventuelles sur la lecture du fichier.. Les erreurs</td>
 </tr>
 </tbody>
 </table>
+<p>sont renvoyé dans Manhattan.py où les erreurs seront géré (affiché à l’utilisateur).</p>
 </dd></dl>
 
 </div>
@@ -242,15 +241,17 @@ contenu.</p>
 <dt id="modules.Decompression.CinDico">
 <code class="descclassname">modules.Decompression.</code><code class="descname">CinDico</code><span class="sig-paren">(</span><em>caractere</em>, <em>dictionnaire</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#CinDico"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.CinDico" title="Lien permanent vers cette définition">¶</a></dt>
 <dd><p>Fonction permettant de détecter la présence d’un code dans le dictionnaire construit par Decompress.</p>
-<p>Elle retourne -1 si le code ne s’y trouve pas. Elle retourne la position du code dans la liste en cas de détection. Cela permet à Decompress de récupérer la suite de caractères correspondante.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
 <li><strong>caractere</strong> – Paramètre correspondant au code d’un caractère ou d’une suite de caractères compressé.</li>
 <li><strong>dictionnaire</strong> – Liste correspondant au dictionnaire en cours d’utilisation et construit par Decompress()</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return test:</th><td class="field-body"><p class="first last">Variable de type Integer ayant pour valeur -1 si le code ne se trouve pas dans le dictionnaire entrée en paramètre ou la position du code dans le dictionnaire en cas de détection. Cela permet à Decompress de récupérer la suite de caractères correspondante.</p>
 </td>
 </tr>
 </tbody>
@@ -266,10 +267,13 @@ contenu.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first simple">
 <li><strong>caracteres</strong> – Il s’agit d’une liste dont chaque élément correspond au code ASCII ou du dictionnaire d’un caractère ou d’une suite de caractère compressé. Ce code doit être exprimé en bit, type string sans le 0b ajouté par le type bytes. LectureFichier() peut fournir une telle liste formatée à partir d’un fichier texte.</li>
 <li><strong>fileOut</strong> – Paramètre contenant le chemin d’accès souhaité par l’utilisateur pour écriture du fichier décompressé.</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Lève:</th><td class="field-body"><p class="first last"><strong>IndexError</strong> – Lors du premier ajout au dictionnaire, la liste est vide. Or, dans le try, nous essayons de récupérer le dernier indice du code ajouté au dictionnaire. Cela générère une erreur IndexError qui est gérée dans le except. En effet, dans ce cas, nous ajoutons au dictionnaire le code avec pour indice 256 ce qui permet de l’initialiser et de ne plus rencontrer l’erreur par la suite.</p>
 </td>
 </tr>
 </tbody>
@@ -295,6 +299,11 @@ contenu.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">param chemin:</th><td class="field-body">Paramètre contenant le chemin d’accès de l’archive à décompresser.</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">raise IndexError:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">Afin de coder les 9ème bits en hexadecimal, il a fallu ajouter des 0 non significatifs à la fin de la liste des 9ème bits. En effet, nous devions posséder une liste de 9ème bits divisible par 8 pour coder en hexadécimal d’où l’ajout de zéro. Cela entraîne ici une erreur IndexError étant donné qu’il n’existe pas de code en hexadécimal pour les 9ème bits ajoutés artificiellement. On sort alors de la boucle for en provoquant un break une fois cette erreur rencontrée (qui correspondra donc au premier 9ème bits non significatifs).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">return ligne:</th><td class="field-body">Liste formatée des codes de caractères sur 9 bits prête à être interprêtée par Decompress()</td>
 </tr>
 </tbody>
 </table>
