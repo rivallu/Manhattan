@@ -74,7 +74,8 @@ def openFileToCompress(fileName):
     Fonction lisant le fichier passé en paramètre et retournant son contenu.
 
     :param fileName: Le chemin d'accès du fichier à lire.
-    :raise IOError:  Les erreurs éventuelles sur la lecture du fichier..
+    :raise IOError:  Les erreurs éventuelles sur la lecture du fichier.. Les erreurs
+    sont renvoyé dans Manhattan.py où les erreurs seront géré (affiché à l'utilisateur).
     """
     try:
         with open(fileName,'r') as f:
