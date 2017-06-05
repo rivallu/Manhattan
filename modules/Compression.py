@@ -6,7 +6,7 @@ def genDict():
     """
     Fonction qui génère un dictionnaire pour permettre la compression.
 
-    :return dico: le dictionnaire
+    :return dico: le dictionnaire contenant les caractères ASCII étendu et leur code en décimal.
     """
     dico={}
     for i in range(0,256):
@@ -15,12 +15,11 @@ def genDict():
 
 def compress(fileIn,fileOut,algo):
     """
-    Fonction générique qui fait les appels au différentes fonctions pour compresser
-    en fonction de l'algo donnée.
+    Fonction générique qui fait les appels aux différentes fonctions pour compresser selon l'algorithme sélectionné.
 
-    :param fileIn: Le fichier à compresser
-    :param fileOut: le fichier de sortie
-    :param algo: l'algo utilisé pour la compression.
+    :param fileIn: Le fichier à compresser.
+    :param fileOut: le fichier de sortie.
+    :param algo: l'algorithme utilisé pour la compression.
     """
     if algo=="lzw":
         datas=openFileToCompress(fileIn)
@@ -30,11 +29,11 @@ def compress(fileIn,fileOut,algo):
 
 def compressLZW(String,fileName):
     """
-    Fonction qui permet de compresser une chaine de caractère en
-    suivant l'algo Lempel-Ziv-Welch.
+    Fonction qui permet de compresser une chaine de caractères en
+    suivant l'algorithme Lempel-Ziv-Welch.
 
-    :param: une chaine de caractère
-    :return output: la chaine compressé
+    :param: Chaîne de caractères devant être compressée. A fournir avec le type string.
+    :param fileName: Le chemin d'accès du fichier à compresser.
     """
     output=''
     dico=genDict()
@@ -72,11 +71,10 @@ def compressLZW(String,fileName):
 
 def openFileToCompress(fileName):
     """
-    Fonctio qui va lire le fichier passé en paramètre et va retoruner tout son
-    contenu.
+    Fonction lisant le fichier passé en paramètre et retournant son contenu.
 
-    :param: le nom du fichier à ouvrir
-    :raise IOError:  les erreurs éventuelle sur la lecture du fichier.
+    :param fileName: Le chemin d'accès du fichier à lire.
+    :raise IOError:  Les erreurs éventuelles sur la lecture du fichier..
     """
     try:
         with open(fileName,'r') as f:
