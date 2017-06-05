@@ -158,7 +158,16 @@
 
 
 <div class="viewcode-block" id="CinDico"><a class="viewcode-back" href="../../modules.html#modules.Decompression.CinDico">[docs]</a><span class="k">def</span> <span class="nf">CinDico</span><span class="p">(</span><span class="n">caractere</span><span class="p">,</span> <span class="n">dictionnaire</span><span class="p">):</span>
-
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fonction permettant de détecter la présence d&#39;un code dans le dictionnaire construit par Decompress.</span>
+<span class="sd">    </span>
+<span class="sd">    Elle retourne -1 si le code ne s&#39;y trouve pas. Elle retourne la position du code dans la liste en cas de détection. Cela permet à Decompress de récupérer la suite de caractères correspondante.</span>
+<span class="sd">    </span>
+<span class="sd">    :param caractere: Paramètre correspondant au code d&#39;un caractère ou d&#39;une suite de caractères compressé.</span>
+<span class="sd">    :param dictionnaire: Liste correspondant au dictionnaire en cours d&#39;utilisation et construit par Decompress()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">test</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionnaire</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">caractere</span> <span class="o">==</span> <span class="n">dictionnaire</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
@@ -167,14 +176,32 @@
 
 <div class="viewcode-block" id="startDecompress"><a class="viewcode-back" href="../../modules.html#modules.Decompression.startDecompress">[docs]</a><span class="k">def</span> <span class="nf">startDecompress</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-
+<span class="sd">    Fonction générique permettant de décompresser suivant l&#39;algorithme de compression utilisé.</span>
+<span class="sd">    </span>
+<span class="sd">    :param fileName: Chemin d&#39;accès de l&#39;archive dont on souhaite la décompression.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lines</span><span class="o">=</span><span class="n">LectureFichier</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
     <span class="n">fileOut</span><span class="o">=</span><span class="n">fileName</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;.txt&quot;</span>
     <span class="n">Decompress</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span><span class="n">fileOut</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LectureFichier"><a class="viewcode-back" href="../../modules.html#modules.Decompression.LectureFichier">[docs]</a><span class="k">def</span> <span class="nf">LectureFichier</span><span class="p">(</span><span class="n">chemin</span><span class="p">):</span>
-
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fonction permettant de lire l&#39;archive et de produire une liste formatée pour la décompression par la fonction Decompress().</span>
+<span class="sd">    </span>
+<span class="sd">    LectureFichier produit d&#39;abord une liste contenant chaque ligne de l&#39;archive compressée.</span>
+<span class="sd">    </span>
+<span class="sd">    La compression ayant ajouté 2 &quot;\n&quot; dans l&#39;archive, LectureFichier cherche donc un élément de la liste correspondant à &quot;b&#39;\n&#39;&quot; afin de collecter tout ce qui se toruve avant comme étant du texte à décoder et tout ce qui se trouve après comme étant le bit de poids fort manquant à chaque caractère.</span>
+<span class="sd">    </span>
+<span class="sd">    Par la suite, LectureFichier lit chaque bit de poids fort et l&#39;ajoute au code du caractère auquel il devrait appartenir.</span>
+<span class="sd">    </span>
+<span class="sd">    Enfin, chaque code est casté en string puis le &quot;0b&quot; restant suite au cast est retiré afin de ne garder qu&#39;une suite de bit.</span>
+<span class="sd">    </span>
+<span class="sd">    Enfin, la fonction retourne la liste correctement formatée et exploitable par Decompress()</span>
+<span class="sd">    </span>
+<span class="sd">    :param chemin: Paramètre contenant le chemin d&#39;accès de l&#39;archive à décompresser.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">fichier</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">chemin</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
 
     <span class="n">ligne</span> <span class="o">=</span> <span class="n">fichier</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
@@ -224,7 +251,16 @@
 
 
 <div class="viewcode-block" id="Decompress"><a class="viewcode-back" href="../../modules.html#modules.Decompression.Decompress">[docs]</a><span class="k">def</span> <span class="nf">Decompress</span><span class="p">(</span><span class="n">caracteres</span><span class="p">,</span><span class="n">fileOut</span><span class="p">):</span>
-
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decompress est la fonction servant à décoder un texte compressé en suivant la méthode de l&#39;algorithme LZW.</span>
+<span class="sd">    </span>
+<span class="sd">    Elle s&#39;appuie sur la fonction LectureFichier afin de recevoir une liste correctement formatée pour la décompression.</span>
+<span class="sd">    </span>
+<span class="sd">    :param caracteres: Il s&#39;agit d&#39;une liste dont chaque élément correspond au code ASCII ou du dictionnaire d&#39;un caractère ou d&#39;une suite de caractère compressé. Ce code doit être exprimé en bit, type string sans le 0b ajouté par le type bytes. LectureFichier() peut fournir une telle liste formatée à partir d&#39;un fichier texte.</span>
+<span class="sd">    :param fileOut: Paramètre contenant le chemin d&#39;accès souhaité par l&#39;utilisateur pour écriture du fichier décompressé.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">resultat</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileOut</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 
     <span class="n">dictionnaire</span> <span class="o">=</span> <span class="p">[]</span>

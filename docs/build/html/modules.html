@@ -241,22 +241,79 @@ contenu.</p>
 <dl class="function">
 <dt id="modules.Decompression.CinDico">
 <code class="descclassname">modules.Decompression.</code><code class="descname">CinDico</code><span class="sig-paren">(</span><em>caractere</em>, <em>dictionnaire</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#CinDico"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.CinDico" title="Lien permanent vers cette définition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fonction permettant de détecter la présence d’un code dans le dictionnaire construit par Decompress.</p>
+<p>Elle retourne -1 si le code ne s’y trouve pas. Elle retourne la position du code dans la liste en cas de détection. Cela permet à Decompress de récupérer la suite de caractères correspondante.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>caractere</strong> – Paramètre correspondant au code d’un caractère ou d’une suite de caractères compressé.</li>
+<li><strong>dictionnaire</strong> – Liste correspondant au dictionnaire en cours d’utilisation et construit par Decompress()</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="modules.Decompression.Decompress">
 <code class="descclassname">modules.Decompression.</code><code class="descname">Decompress</code><span class="sig-paren">(</span><em>caracteres</em>, <em>fileOut</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#Decompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.Decompress" title="Lien permanent vers cette définition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Decompress est la fonction servant à décoder un texte compressé en suivant la méthode de l’algorithme LZW.</p>
+<p>Elle s’appuie sur la fonction LectureFichier afin de recevoir une liste correctement formatée pour la décompression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><ul class="first last simple">
+<li><strong>caracteres</strong> – Il s’agit d’une liste dont chaque élément correspond au code ASCII ou du dictionnaire d’un caractère ou d’une suite de caractère compressé. Ce code doit être exprimé en bit, type string sans le 0b ajouté par le type bytes. LectureFichier() peut fournir une telle liste formatée à partir d’un fichier texte.</li>
+<li><strong>fileOut</strong> – Paramètre contenant le chemin d’accès souhaité par l’utilisateur pour écriture du fichier décompressé.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="modules.Decompression.LectureFichier">
 <code class="descclassname">modules.Decompression.</code><code class="descname">LectureFichier</code><span class="sig-paren">(</span><em>chemin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#LectureFichier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.LectureFichier" title="Lien permanent vers cette définition">¶</a></dt>
-<dd></dd></dl>
+<dd><blockquote>
+<div><p>Fonction permettant de lire l’archive et de produire une liste formatée pour la décompression par la fonction Decompress().</p>
+<p>LectureFichier produit d’abord une liste contenant chaque ligne de l’archive compressée.</p>
+<p>La compression ayant ajouté 2 «&nbsp;</p>
+</div></blockquote>
+<p>&nbsp;» dans l’archive, LectureFichier cherche donc un élément de la liste correspondant à «&nbsp;b”
+“&nbsp;» afin de collecter tout ce qui se toruve avant comme étant du texte à décoder et tout ce qui se trouve après comme étant le bit de poids fort manquant à chaque caractère.</p>
+<blockquote>
+<div><p>Par la suite, LectureFichier lit chaque bit de poids fort et l’ajoute au code du caractère auquel il devrait appartenir.</p>
+<p>Enfin, chaque code est casté en string puis le «&nbsp;0b&nbsp;» restant suite au cast est retiré afin de ne garder qu’une suite de bit.</p>
+<p>Enfin, la fonction retourne la liste correctement formatée et exploitable par Decompress()</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param chemin:</th><td class="field-body">Paramètre contenant le chemin d’accès de l’archive à décompresser.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
 
 <dl class="function">
 <dt id="modules.Decompression.startDecompress">
 <code class="descclassname">modules.Decompression.</code><code class="descname">startDecompress</code><span class="sig-paren">(</span><em>fileName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modules/Decompression.html#startDecompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modules.Decompression.startDecompress" title="Lien permanent vers cette définition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fonction générique permettant de décompresser suivant l’algorithme de compression utilisé.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fileName</strong> – Chemin d’accès de l’archive dont on souhaite la décompression.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 <div class="section" id="module-modules">
