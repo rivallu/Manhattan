@@ -23,7 +23,6 @@ def LectureFichier(chemin):
     fichier = open(chemin, 'rb')
 
     ligne = fichier.readlines()
-    print(ligne)
     binary = ""
     n = len(ligne)
     ninebit = ""
@@ -39,8 +38,6 @@ def LectureFichier(chemin):
         ligne[sauv] = ligne[sauv] + ligne[i]
 
     ligne = [ligne[0], ligne[sauv][1:]]
-    print(ligne)
-    print("\n")
     for i in range(0, len(ligne[1])):
         bit9 = str(bin(ligne[1][i]))
         n = len(bit9) - 2
@@ -64,12 +61,9 @@ def LectureFichier(chemin):
                 zero = zero + "0"
             carac = "0b" + zero + carac[2:]
             binary = binary + "0b" + bit9[j] + carac[2:] + " "
-            print(binary)
 
     ligne = binary.split("0b")
     ligne.remove('')
-    print(ligne)
-    print("\n", ninebit)
     fichier.close()
     return ligne
 
@@ -107,6 +101,5 @@ def Decompress(caracteres,fileOut):
 
         w = entree
 
-    print(dictionnaire)
     resultat.close()
     return "Opération Réussie !"
